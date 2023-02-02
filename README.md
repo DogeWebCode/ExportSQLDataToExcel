@@ -1,5 +1,5 @@
 ## ExportSQLDataToExcel
-此為炎洲所需開發之專案   
+ 
 主要功能為：  
 1. 將SQL資料匯出至EXCEL  
 2. 在WinFrom畫面排出日期、設備名稱，user選擇完後可先預覽資料，再決定要不要匯出  
