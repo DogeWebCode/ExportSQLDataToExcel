@@ -81,7 +81,7 @@ namespace ExportSQLDataToExcel
                 app.DisplayAlerts = false; //不提示信息
                 app.ScreenUpdating = false; //停止刷新螢幕，加快速度
                 Workbooks wbs = app.Workbooks; //取得工作頁
-                _Workbook wb = wbs.Open(filename); //開啟excel檔，這邊開啟的為設定好的tamplate
+                _Workbook wb = wbs.Open(filename); //開啟excel檔，這邊開啟的為設定好的template
                 Sheets shs = wb.Worksheets; //檔案中的Sheets
 
                 using (MySqlConnection conn = new MySqlConnection(@"server=127.0.0.1 ; port=3306 ; pwd = root;user=root ; database = test ; charset = utf8"))
