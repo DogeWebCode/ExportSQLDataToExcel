@@ -29,7 +29,7 @@ namespace ExportSQLDataToExcel
             DateTime dEnd = new DateTime(this.dtToDate.Value.Year, this.dtToDate.Value.Month, this.dtToDate.Value.Day, 23, 59, 59);
             this.dtToDate.Value = dEnd;
 
-            using (MySqlConnection conn = new MySqlConnection(@"server=127.0.0.1 ; port=3306 ; pwd = root;user=root ; database = test ; charset = utf8"))
+            using (MySqlConnection conn = new MySqlConnection(@"server=127.0.0.1 ; port=3306 ; pwd =;user=root ; database = test ; charset = utf8"))
             //測試數據用
             //using (MySqlConnection conn = new MySqlConnection(@"server=127.0.0.1 ; port=3306 ; pwd = root;user=root ; database = bigdata_test ; charset = utf8"))
             {
@@ -91,7 +91,7 @@ namespace ExportSQLDataToExcel
                 _Workbook wb = wbs.Open(filename); //開啟excel檔，這邊開啟的為設定好的tamplate
                 Sheets shs = wb.Worksheets; //檔案中的Sheets
 
-                using (MySqlConnection conn = new MySqlConnection(@"server=127.0.0.1 ; port=3306 ; pwd = root;user=root ; database = test ; charset = utf8"))
+                using (MySqlConnection conn = new MySqlConnection(@"server=127.0.0.1 ; port=3306 ; pwd =;user=root ; database = test ; charset = utf8"))
                 //測試數據用
                 //using (MySqlConnection conn = new MySqlConnection(@"server=127.0.0.1 ; port=3306 ; pwd = root;user=root ; database = bigdata_test ; charset = utf8"))
                 {
