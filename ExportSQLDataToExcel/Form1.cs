@@ -7,6 +7,7 @@ using Application = Microsoft.Office.Interop.Excel.Application;
 using System.Data;
 using System.Diagnostics;
 using HZH_Controls.Forms;
+using System.Globalization;
 
 namespace ExportSQLDataToExcel
 {
@@ -21,7 +22,14 @@ namespace ExportSQLDataToExcel
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            using (MySqlConnection conn = new MySqlConnection(@"server=127.0.0.1 ; port=3306 ; pwd =;user=root ; database = test ; charset = utf8"))
+            //設定DatetimePicker為當日日期，並且設定預設的開始時間為00:00:00
+            DateTime dStart = this.dtFromDate.Value.Date;
+            this.dtFromDate.Value = dStart;
+            //設定DatetimePicker為當日日期，並且設定預設的結束時間為23:59:59
+            DateTime dEnd = new DateTime(this.dtToDate.Value.Year, this.dtToDate.Value.Month, this.dtToDate.Value.Day, 23, 59, 59);
+            this.dtToDate.Value = dEnd;
+
+            using (MySqlConnection conn = new MySqlConnection(@"server=127.0.0.1 ; port=3306 ; pwd = root;user=root ; database = test ; charset = utf8"))
             //測試數據用
             //using (MySqlConnection conn = new MySqlConnection(@"server=127.0.0.1 ; port=3306 ; pwd = root;user=root ; database = bigdata_test ; charset = utf8"))
             {
@@ -47,22 +55,17 @@ namespace ExportSQLDataToExcel
             }
 
 
-        }
+        }      
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-
-        
-        
-
-        private void button1_Click(object sender, EventArgs e)
+        private void btn_Export_Click(object sender, EventArgs e)
         {
             
 
-            Application app = new Application();           
+            Application app = new Application();
+            //設定DWName變數為，抓取目前日期為星期幾，變轉化成TW地區的顯示方式，即為"星期X"
+            CultureInfo ci = new CultureInfo("zh-tw");            
+            string DWName = ci.DateTimeFormat.GetDayName(DateTime.Today.DayOfWeek);
+
             //儲存視窗各項設定
 
             string filename = StartupFilePath + "D:\\template.xlsm";
@@ -72,7 +75,7 @@ namespace ExportSQLDataToExcel
             saveFileDialog.Filter = "Excel 工作簿.xlsm|*.xlsm";//格式設定
             saveFileDialog.Title = "儲存Excel檔";
             saveFileDialog.RestoreDirectory = true;//是否開啟上次存檔的位置
-            saveFileDialog.FileName = DateTime.Now.ToString("yyyy-MM-dd__HH-mm-ss")+"__"+comboBox.Text;
+            saveFileDialog.FileName = DateTime.Now.ToString("yyyyMMdd_HH-mm-ss")+"_"+ DWName + "_"+comboBox.Text;
             saveFileDialog.FilterIndex = 1;
 
             
@@ -92,7 +95,7 @@ namespace ExportSQLDataToExcel
                 //測試數據用
                 //using (MySqlConnection conn = new MySqlConnection(@"server=127.0.0.1 ; port=3306 ; pwd = root;user=root ; database = bigdata_test ; charset = utf8"))
                 {
-                    using (MySqlDataAdapter sda = new MySqlDataAdapter($"SELECT * FROM bwanachglog WHERE TagName = '{comboBox.Text}' AND LogDate BETWEEN '{dtFromDate.Value}' AND '{dtToDate.Value}' ORDER BY bwanachglog.LogDate ASC", conn))
+                    using (MySqlDataAdapter sda = new MySqlDataAdapter($"SELECT * FROM bwanachglog WHERE TagName = '{comboBox.Text}' AND LogDate BETWEEN '{dtFromDate.Value.ToShortDateString()}' AND '{dtToDate.Value.ToShortDateString()}' AND LogTime BETWEEN '{dtFromDate.Value.TimeOfDay}' AND '{dtToDate.Value.TimeOfDay}' ORDER BY bwanachglog.LogTime,bwanachglog.LogDate ASC", conn))
                     //測試數據用
                     //using (MySqlDataAdapter sda = new MySqlDataAdapter("select * from vote_record limit 100000", conn))
 
@@ -203,7 +206,7 @@ namespace ExportSQLDataToExcel
             //測試數據用
             //using (MySqlConnection conn = new MySqlConnection(@"server=127.0.0.1 ; port=3306 ; pwd = root;user=root ; database = bigdata_test ; charset = utf8"))
             {
-                using (MySqlDataAdapter sda = new MySqlDataAdapter($"SELECT * FROM bwanachglog WHERE TagName = '{comboBox.Text}' AND LogDate BETWEEN '{dtFromDate.Value}' AND '{dtToDate.Value}' ORDER BY bwanachglog.LogDate ASC", conn))
+                using (MySqlDataAdapter sda = new MySqlDataAdapter($"SELECT * FROM bwanachglog WHERE TagName = '{comboBox.Text}' AND LogDate BETWEEN '{dtFromDate.Value}' AND '{dtToDate.Value}' AND LogTime BETWEEN '{dtFromDate.Value.TimeOfDay}' AND '{dtToDate.Value.TimeOfDay}' ORDER BY bwanachglog.LogTime,bwanachglog.LogDate ASC", conn))
                 //測試數據用
                 //using (MySqlDataAdapter sda = new MySqlDataAdapter("select * from vote_record", conn))
                 {
@@ -230,27 +233,7 @@ namespace ExportSQLDataToExcel
                     }
                 }
             }
-        }
-
-        private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void backgroundWorker_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
-        {
-
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblTip_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+        } 
     }
 }
 
