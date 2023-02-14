@@ -43,11 +43,11 @@ namespace ExportSQLDataToExcel
             this.reFrigeratorDataTableBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label3 = new System.Windows.Forms.Label();
             this.dtToDate = new System.Windows.Forms.DateTimePicker();
-            this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.comboBox = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.lblTip = new System.Windows.Forms.TextBox();
+            this.graphicalOverlayComponent1 = new HZH_Controls.Controls.GraphicalOverlayComponent(this.components);
             this.orderBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.orderBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.reFrigeratorBindingSource)).BeginInit();
@@ -71,7 +71,7 @@ namespace ExportSQLDataToExcel
             // btn_Export
             // 
             this.btn_Export.BackColor = System.Drawing.SystemColors.Highlight;
-            this.btn_Export.Font = new System.Drawing.Font("微軟正黑體", 14F);
+            this.btn_Export.Font = new System.Drawing.Font("微軟正黑體", 16F);
             this.btn_Export.ForeColor = System.Drawing.SystemColors.Desktop;
             this.btn_Export.Location = new System.Drawing.Point(963, 614);
             this.btn_Export.Name = "btn_Export";
@@ -79,7 +79,7 @@ namespace ExportSQLDataToExcel
             this.btn_Export.TabIndex = 1;
             this.btn_Export.Text = "儲存至Excel";
             this.btn_Export.UseVisualStyleBackColor = false;
-            this.btn_Export.Click += new System.EventHandler(this.button1_Click);
+            this.btn_Export.Click += new System.EventHandler(this.btn_Export_Click);
             // 
             // reFrigeratorTableAdapter
             // 
@@ -89,7 +89,7 @@ namespace ExportSQLDataToExcel
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微軟正黑體", 18F);
-            this.label1.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.label1.Location = new System.Drawing.Point(468, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(294, 38);
@@ -98,7 +98,8 @@ namespace ExportSQLDataToExcel
             // 
             // btnLoad
             // 
-            this.btnLoad.Location = new System.Drawing.Point(1001, 57);
+            this.btnLoad.Font = new System.Drawing.Font("微軟正黑體", 9F);
+            this.btnLoad.Location = new System.Drawing.Point(1001, 55);
             this.btnLoad.Name = "btnLoad";
             this.btnLoad.Size = new System.Drawing.Size(113, 43);
             this.btnLoad.TabIndex = 3;
@@ -108,18 +109,21 @@ namespace ExportSQLDataToExcel
             // 
             // dtFromDate
             // 
-            this.dtFromDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtFromDate.CustomFormat = "yyyy-MM-dd HH:mm:ss";
+            this.dtFromDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtFromDate.Location = new System.Drawing.Point(426, 67);
             this.dtFromDate.Name = "dtFromDate";
             this.dtFromDate.Size = new System.Drawing.Size(200, 25);
             this.dtFromDate.TabIndex = 4;
+            this.dtFromDate.Value = new System.DateTime(2023, 2, 9, 0, 0, 0, 0);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(338, 74);
+            this.label2.Font = new System.Drawing.Font("微軟正黑體", 9F);
+            this.label2.Location = new System.Drawing.Point(338, 71);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(82, 15);
+            this.label2.Size = new System.Drawing.Size(84, 19);
             this.label2.TabIndex = 5;
             this.label2.Text = "開始日期：";
             // 
@@ -132,7 +136,6 @@ namespace ExportSQLDataToExcel
             this.dataGridView1.RowTemplate.Height = 27;
             this.dataGridView1.Size = new System.Drawing.Size(1167, 506);
             this.dataGridView1.TabIndex = 6;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick_1);
             // 
             // reFrigeratorDataTableBindingSource
             // 
@@ -141,24 +144,22 @@ namespace ExportSQLDataToExcel
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(632, 73);
+            this.label3.Font = new System.Drawing.Font("微軟正黑體", 9F);
+            this.label3.Location = new System.Drawing.Point(632, 70);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(82, 15);
+            this.label3.Size = new System.Drawing.Size(84, 19);
             this.label3.TabIndex = 8;
             this.label3.Text = "結束日期：";
             // 
             // dtToDate
             // 
-            this.dtToDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtToDate.CustomFormat = "yyyy-MM-dd HH:mm:ss";
+            this.dtToDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtToDate.Location = new System.Drawing.Point(720, 66);
             this.dtToDate.Name = "dtToDate";
             this.dtToDate.Size = new System.Drawing.Size(200, 25);
             this.dtToDate.TabIndex = 7;
-            // 
-            // backgroundWorker
-            // 
-            this.backgroundWorker.WorkerReportsProgress = true;
-            this.backgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker_ProgressChanged);
+            this.dtToDate.Value = new System.DateTime(2023, 2, 9, 0, 0, 0, 0);
             // 
             // comboBox
             // 
@@ -175,24 +176,24 @@ namespace ExportSQLDataToExcel
             this.comboBox.Name = "comboBox";
             this.comboBox.Size = new System.Drawing.Size(121, 23);
             this.comboBox.TabIndex = 12;
-            this.comboBox.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(110, 74);
+            this.label4.Font = new System.Drawing.Font("微軟正黑體", 9F);
+            this.label4.Location = new System.Drawing.Point(109, 70);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(82, 15);
+            this.label4.Size = new System.Drawing.Size(84, 19);
             this.label4.TabIndex = 13;
             this.label4.Text = "選擇設備：";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("新細明體", 13F);
+            this.label5.Font = new System.Drawing.Font("微軟正黑體", 13F);
             this.label5.Location = new System.Drawing.Point(12, 635);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(164, 22);
+            this.label5.Size = new System.Drawing.Size(166, 28);
             this.label5.TabIndex = 14;
             this.label5.Text = "資料數量預覽：";
             // 
@@ -208,6 +209,10 @@ namespace ExportSQLDataToExcel
             this.lblTip.Size = new System.Drawing.Size(230, 35);
             this.lblTip.TabIndex = 15;
             this.lblTip.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // graphicalOverlayComponent1
+            // 
+            this.graphicalOverlayComponent1.Owner = null;
             // 
             // orderBindingSource1
             // 
@@ -259,7 +264,6 @@ namespace ExportSQLDataToExcel
         private AppDataTableAdapters.ReFrigeratorTableAdapter reFrigeratorTableAdapter;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnLoad;
-        private System.Windows.Forms.DateTimePicker dtFromDate;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label3;
@@ -267,11 +271,12 @@ namespace ExportSQLDataToExcel
         private System.Windows.Forms.BindingSource reFrigeratorDataTableBindingSource;
         private System.Windows.Forms.BindingSource orderBindingSource;
         private System.Windows.Forms.BindingSource orderBindingSource1;
-        private System.ComponentModel.BackgroundWorker backgroundWorker;
         private System.Windows.Forms.ComboBox comboBox;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox lblTip;
+        private System.Windows.Forms.DateTimePicker dtFromDate;
+        private HZH_Controls.Controls.GraphicalOverlayComponent graphicalOverlayComponent1;
     }
 }
 
