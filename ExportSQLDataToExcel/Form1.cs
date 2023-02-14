@@ -21,7 +21,7 @@ namespace ExportSQLDataToExcel
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            using (MySqlConnection conn = new MySqlConnection(@"server=127.0.0.1 ; port=3306 ; pwd = root;user=root ; database = test ; charset = utf8"))
+            using (MySqlConnection conn = new MySqlConnection(@"server=127.0.0.1 ; port=3306 ; pwd =;user=root ; database = test ; charset = utf8"))
             //測試數據用
             //using (MySqlConnection conn = new MySqlConnection(@"server=127.0.0.1 ; port=3306 ; pwd = root;user=root ; database = bigdata_test ; charset = utf8"))
             {
@@ -199,7 +199,7 @@ namespace ExportSQLDataToExcel
 
         private void btnLoad_Click(object sender, EventArgs e)
         {
-            using (MySqlConnection conn = new MySqlConnection(@"server=127.0.0.1 ; port=3306 ; pwd = root;user=root ; database = test ; charset = utf8"))
+            using (MySqlConnection conn = new MySqlConnection(@"server=127.0.0.1 ; port=3306 ; pwd =;user=root ; database = test ; charset = utf8"))
             //測試數據用
             //using (MySqlConnection conn = new MySqlConnection(@"server=127.0.0.1 ; port=3306 ; pwd = root;user=root ; database = bigdata_test ; charset = utf8"))
             {
