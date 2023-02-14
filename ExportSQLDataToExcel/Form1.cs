@@ -21,15 +21,8 @@ namespace ExportSQLDataToExcel
         }
 
         private void Form1_Load(object sender, EventArgs e)
-        {
-            //設定DatetimePicker為當日日期，並且設定預設的開始時間為00:00:00
-            DateTime dStart = this.dtFromDate.Value.Date;
-            this.dtFromDate.Value = dStart;
-            //設定DatetimePicker為當日日期，並且設定預設的結束時間為23:59:59
-            DateTime dEnd = new DateTime(this.dtToDate.Value.Year, this.dtToDate.Value.Month, this.dtToDate.Value.Day, 23, 59, 59);
-            this.dtToDate.Value = dEnd;
-
-            using (MySqlConnection conn = new MySqlConnection(@"server=127.0.0.1 ; port=3306 ; pwd = root;user=root ; database = test ; charset = utf8"))
+        {           
+            using (MySqlConnection conn = new MySqlConnection(@"server=127.0.0.1 ; port=3306 ; pwd =;user=root ; database = test ; charset = utf8"))
             //測試數據用
             //using (MySqlConnection conn = new MySqlConnection(@"server=127.0.0.1 ; port=3306 ; pwd = root;user=root ; database = bigdata_test ; charset = utf8"))
             {
@@ -95,7 +88,7 @@ namespace ExportSQLDataToExcel
                 //測試數據用
                 //using (MySqlConnection conn = new MySqlConnection(@"server=127.0.0.1 ; port=3306 ; pwd = root;user=root ; database = bigdata_test ; charset = utf8"))
                 {
-                    using (MySqlDataAdapter sda = new MySqlDataAdapter($"SELECT * FROM bwanachglog WHERE TagName = '{comboBox.Text}' AND LogDate BETWEEN '{dtFromDate.Value.ToShortDateString()}' AND '{dtToDate.Value.ToShortDateString()}' AND LogTime BETWEEN '{dtFromDate.Value.TimeOfDay}' AND '{dtToDate.Value.TimeOfDay}' ORDER BY bwanachglog.LogTime,bwanachglog.LogDate ASC", conn))
+                    using (MySqlDataAdapter sda = new MySqlDataAdapter($"SELECT * FROM bwanachglog WHERE TagName = '{comboBox.Text}' AND LogDate BETWEEN '{dtFromDate.Value.ToShortDateString()}' AND '{dtToDate.Value.ToShortDateString()}' ORDER BY bwanachglog.LogTime,bwanachglog.LogDate ASC", conn))
                     //測試數據用
                     //using (MySqlDataAdapter sda = new MySqlDataAdapter("select * from vote_record limit 100000", conn))
 
@@ -206,7 +199,7 @@ namespace ExportSQLDataToExcel
             //測試數據用
             //using (MySqlConnection conn = new MySqlConnection(@"server=127.0.0.1 ; port=3306 ; pwd = root;user=root ; database = bigdata_test ; charset = utf8"))
             {
-                using (MySqlDataAdapter sda = new MySqlDataAdapter($"SELECT * FROM bwanachglog WHERE TagName = '{comboBox.Text}' AND LogDate BETWEEN '{dtFromDate.Value}' AND '{dtToDate.Value}' AND LogTime BETWEEN '{dtFromDate.Value.TimeOfDay}' AND '{dtToDate.Value.TimeOfDay}' ORDER BY bwanachglog.LogTime,bwanachglog.LogDate ASC", conn))
+                using (MySqlDataAdapter sda = new MySqlDataAdapter($"SELECT * FROM bwanachglog WHERE TagName = '{comboBox.Text}' AND LogDate BETWEEN '{dtFromDate.Value}' AND '{dtToDate.Value}' ORDER BY bwanachglog.LogTime,bwanachglog.LogDate ASC", conn))
                 //測試數據用
                 //using (MySqlDataAdapter sda = new MySqlDataAdapter("select * from vote_record", conn))
                 {

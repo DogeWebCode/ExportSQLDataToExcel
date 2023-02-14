@@ -110,7 +110,7 @@ namespace ExportSQLDataToExcel
             // dtFromDate
             // 
             this.dtFromDate.CustomFormat = "yyyy-MM-dd HH:mm:ss";
-            this.dtFromDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtFromDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtFromDate.Location = new System.Drawing.Point(426, 67);
             this.dtFromDate.Name = "dtFromDate";
             this.dtFromDate.Size = new System.Drawing.Size(200, 25);
@@ -154,7 +154,7 @@ namespace ExportSQLDataToExcel
             // dtToDate
             // 
             this.dtToDate.CustomFormat = "yyyy-MM-dd HH:mm:ss";
-            this.dtToDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtToDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtToDate.Location = new System.Drawing.Point(720, 66);
             this.dtToDate.Name = "dtToDate";
             this.dtToDate.Size = new System.Drawing.Size(200, 25);
